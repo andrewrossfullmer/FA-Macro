@@ -1,0 +1,25 @@
+Sub Create_PDFs()
+' Create and save .pdf
+
+    ActiveSheet.ExportAsFixedFormat _
+        Type:=xlTypePDF, _
+        Filename:="I:\__Incoming Students\ALEs\Fall 2020" & FolderName & "\" & ActiveSheet.Range("F6").Value & " - ALE.pdf", _
+        Quality:=xlQualityStandard, _
+        IncludeDocProperties:=True, _
+        IgnorePrintAreas:=False, _
+        OpenAfterPublish:=True
+        MsgBox "The PDF has been saved to I:\__Incoming Students\ALEs\Fall 2020."
+    End
+    Columns("J:J").ColumnWidth = 8.33
+    Range("E7").Select
+
+' If printing from page x to x is needed,
+' use the following after "IgnorePrintAreas"
+' From:=1, _
+' To:=5, _
+' and before "OpenAfterPublish"
+' If the omitted parameter is From, publishing begins at the beginning.
+' If you omit the To parameter, publishing goes all the way to the last page.
+        
+End Sub
+
