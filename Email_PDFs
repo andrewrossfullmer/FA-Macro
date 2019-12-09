@@ -1,0 +1,38 @@
+Sub Email_PDFs()
+'Working in Excel 2000-2016
+    Dim Source As Range
+    Dim Dest As Workbook
+    Dim wb As Workbook
+    Dim TempFilePath As String
+    Dim TempFileName As String
+    Dim FileExtStr As String
+    Dim FileFormatNum As Long
+    Dim OutApp As Object
+    Dim OutMail As Object
+
+    Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+
+    With Dest
+        Recip = [H6].Value  'References email address on ALE form.
+        On Error Resume Next
+        With OutMail
+            .To = Recip
+            .CC = Copy
+            .BCC = ""
+            .Subject = "Neumont Award Letter Estimate"
+            .Body = "Please review your attached Neumont Award Letter Estimate and let me know if there are any questions."
+            .Attachments.Add Range("E10").Value
+            .Display   'use .Display or .Send based on preference
+        End With
+        On Error GoTo 0
+    End With
+
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+
+    With Application
+        .ScreenUpdating = True
+        .EnableEvents = True
+    End With
+End Sub
