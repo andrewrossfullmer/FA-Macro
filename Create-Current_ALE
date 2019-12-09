@@ -1,0 +1,22 @@
+Sub Create_Current_ALE()
+'
+    Sheets("ALE").Select 'Selects the ALE in order to copy the worksheet.
+    Application.CutCopyMode = False 'Copy mode designation in Excel.
+    Sheets("ALE").Copy After:=Sheets(7) 'Copies ALE sheet and places the copy after the 8th sheet.
+    Set wh = Worksheets(ActiveSheet.Name) 'Names the tab.
+    ActiveSheet.Name = wh.Range("F6").Value 'Names with the value found in F6.
+    ActiveSheet.Unprotect  'Unprotects the copied sheet for manipulation.
+    Range("A1:O62").Select 'Selects range of the ALE.
+    Selection.Copy  'Copies the range of the ALE.
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+    :=False, Transpose:=False
+    ActiveSheet.Shapes.Range(Array("Button 3")).Select  'Selects "Create Current ALE" button.
+    Selection.Delete  'Removes "Create Current ALE" button.
+        Dim cell As Range
+        For Each cell In Range("M20,M25:M36,M50:M53") 'Hides rows with zero data.
+        If UCase(cell.Value) = "0" Then
+        cell.EntireRow.Hidden = True
+        End If
+    Next
+End Sub
+
