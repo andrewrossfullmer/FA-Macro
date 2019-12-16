@@ -1,0 +1,6 @@
+Sub last()
+lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+lastcol = Cells(1, Columns.Count).End(xlToLeft).Column
+nextrow = Cells(Rows.Count, 1).End(xlUp).Row + 1
+Cells(nextrow, 1).Select
+End Sub
